@@ -1,5 +1,5 @@
 import caffe
-import surgery, score
+import surgery, score, plotter
 
 import numpy as np
 import os
@@ -27,6 +27,12 @@ surgery.interp(solver.net, interp_layers)
 # scoring
 val = np.loadtxt('../data/segperson/indices/val.txt', dtype=str)
 
+accs = []
+losss = []
+
 for _ in range(75):
     solver.step(4000)
-    score.seg_tests(solver, False, val, layer='score')
+    acc, loss = score.seg_tests(solver, False, val, layer='score')
+    accs = np.append(accs, acc)
+    losss = np.append(losss, loss)
+    plotter.plot(accs, losss)
