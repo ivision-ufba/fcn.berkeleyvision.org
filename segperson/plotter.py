@@ -10,7 +10,7 @@ def plot(acc, loss, maxepoch=75):
     plt.ylabel('accuracy')
     plt.axis([1, 75, 0, 100])
     plt.savefig('accuracy.png')
-    plt.show()
+    plt.clf()
     
     #plot loss
     plt.plot(idx, loss, 'b-')
@@ -18,9 +18,3 @@ def plot(acc, loss, maxepoch=75):
     plt.ylabel('loss')
     plt.axis([1, 75, 0, np.max(loss)])
     plt.savefig('loss.png')
-
-if __name__ == '__main__':
-    np.random.seed(1337)
-    acc = np.random.uniform(0, 100, 75)
-    loss = np.random.uniform(0, 1829234, 75)
-    plot(acc, loss)
