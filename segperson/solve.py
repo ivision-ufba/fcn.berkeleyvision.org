@@ -27,12 +27,12 @@ surgery.interp(solver.net, interp_layers)
 # scoring
 val = np.loadtxt('../data/segperson/indices/val.txt', dtype=str)
 
-accs = []
-losss = []
+acc = np.empty(75)
+loss = np.empty(75)
 
-for _ in range(75):
+for it in range(75):
     solver.step(4000)
-    acc, loss = score.seg_tests(solver, False, val, layer='score')
-    accs = np.append(accs, acc)
-    losss = np.append(losss, loss)
-    plotter.plot(accs, losss)
+    a, l = score.seg_tests(solver, False, val, layer='score')
+    acc[it] = 100 * a
+    loss[it] = l
+    plotter.plot(acc, loss, it)
